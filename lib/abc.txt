@@ -1,0 +1,23 @@
+ try {
+      final res =
+          await http.get(Uri.parse("$_baseUrl?_page=$_page&_limit=$_limit"));
+          final List fetchedPosts = json.decode(res.body);
+      if (fetchedPosts.isNotEmpty) {
+        setState(() {
+          _posts.addAll(fetchedPosts);
+        });
+      } else {
+        setState(() {
+          _hasNextPage=false;
+        });
+      }
+    } catch (err) {
+      print('Error: $err');
+      setState(() {
+
+      });
+
+      setState(() {
+        _isLoadMoreRunning == false;
+      });
+    }
